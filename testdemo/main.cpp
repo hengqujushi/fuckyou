@@ -23,9 +23,26 @@ void initialize(long &ri);
 void show(const long &ri);
 bool isMinus(const long &ri);  // Predicate function
 
+template <class T>
+T sum(T a,T b)
+{
+    return a+b;
+}
+
+template <class T,class U>
+bool is_equal(T a, U b)
+{
+    return ( a == b);
+}
+
 int main()
 {
-    
+    int x = sum<int>(2,3);
+    double y = sum<double>(2.1,2.7);
+    cout << "sum int result :" << x << endl;
+    cout << "sum double result :" << y << endl;
+    cout << is_equal(10,9.1) << endl;
+    cout << is_equal(10,10) << endl;
 }
 
 // Set ri to a signed integer value
