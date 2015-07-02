@@ -15,60 +15,67 @@
 
 using namespace std;
 
-#define VSIZE 24        // Size of vector
-vector<long> v(VSIZE);  // Vector object
+struct BSTreeNode{
+    int value;
+    BSTreeNode *left;
+    BSTreeNode *right;
+};
 
-// Function prototypes
-void initialize(long &ri);
-void show(const long &ri);
-bool isMinus(const long &ri);  // Predicate function
+void reverseTree(BSTreeNode* p);
+void addTreeNode(BSTreeNode* &p, int value);
+void printLDR(BSTreeNode* p);
 
-template <class T>
-T sum(T a,T b)
-{
-    return a+b;
+int main(){
+    BSTreeNode* head = NULL;
+    int input = 0;
+    while(true){
+        cout << input;
+        if(input != -1){
+            addTreeNode(head, input);
+        }
+        else
+            break;
+    }
+    cout<<"before reverse:"<<endl;
+    printLDR(head);
+    cout<<"after reverse:"<<endl;
+    reverseTree(head);
+    printLDR(head);
 }
 
-template <class T,class U>
-bool is_equal(T a, U b)
-{
-    return ( a == b);
+void addTreeNode(BSTreeNode* &p, int value){
+    if(p == NULL){
+        BSTreeNode* tmp = new BSTreeNode();
+        tmp->value = value;
+        tmp->left = NULL;
+        tmp->right = NULL;
+    }
+    else{
+        if(value <= p->value){
+            addTreeNode(p->left, value);
+        }
+        else{
+            addTreeNode(p->right, value);
+        }
+    }
 }
 
-template <class T,int N>
-T fixed_multiply (T eval)
-{
-    return eval*N;
+void printLDR(BSTreeNode* p){
+    if (p == NULL){
+        return;
+    }
+    printLDR(p->left);
+    cout<<p->value<<endl;
+    printLDR(p->right);
 }
 
-int main()
-{
-    int x = sum<int>(2,3);
-    double y = sum<double>(2.1,2.7);
-    cout << "sum int result :" << x << endl;
-    cout << "sum double result :" << y << endl;
-    cout << is_equal(10,9.1) << endl;
-    cout << is_equal(10,10) << endl;
-    cout << fixed_multiply<int,2>(10) << endl;
-    cout << fixed_multiply<int,3 >(20) <<endl;
-    cout << (2^1) << endl;
-}
-
-// Set ri to a signed integer value
-void initialize(long &ri)
-{
-    ri = ( random() - (RAND_MAX / 2) );
-    //  ri = random();
-}
-
-// Display value of ri
-void show(const long &ri)
-{
-    cout << ri << "  ";
-}
-
-// Returns true if ri is less than 0
-bool isMinus(const long &ri)
-{
-    return (ri < 0);
+void reverseTree(BSTreeNode* p){
+    if (p == NULL){
+        return;
+    }
+    BSTreeNode* tmp = p->left;
+    p->left = p->right;
+    p->right = tmp;
+    reverseTree(p->left);
+    reverseTree(p->right);
 }
