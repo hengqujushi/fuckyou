@@ -35,6 +35,12 @@ bool is_equal(T a, U b)
     return ( a == b);
 }
 
+template <class T,int N>
+T fixed_multiply (T eval)
+{
+    return eval*N;
+}
+
 int main()
 {
     int x = sum<int>(2,3);
@@ -43,6 +49,9 @@ int main()
     cout << "sum double result :" << y << endl;
     cout << is_equal(10,9.1) << endl;
     cout << is_equal(10,10) << endl;
+    cout << fixed_multiply<int,2>(10) << endl;
+    cout << fixed_multiply<int,3 >(20) <<endl;
+    cout << (2^1) << endl;
 }
 
 // Set ri to a signed integer value
