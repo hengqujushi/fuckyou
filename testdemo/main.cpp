@@ -29,7 +29,8 @@ int main(){
     BSTreeNode* head = NULL;
     int input = 0;
     while(true){
-        cout << input;
+        cout << "please enter some integer:"<<endl;
+        cin >> input;
         if(input != -1){
             addTreeNode(head, input);
         }
@@ -49,6 +50,7 @@ void addTreeNode(BSTreeNode* &p, int value){
         tmp->value = value;
         tmp->left = NULL;
         tmp->right = NULL;
+        p = tmp;
     }
     else{
         if(value <= p->value){
